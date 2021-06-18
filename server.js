@@ -1,28 +1,21 @@
+const dotenv = require("dotenv");
 const express = require('express')
 const app = express()
-const mongoose = require('mongoose')
-const PORT =  process.env.PORT || 8000
-const { MONGOURI } = require('./config/keys')
+dotenv.config({ path: './config.env' });
+const PORT = process.env.PORT
 
 
-mongoose.connect(MONGOURI, {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+// require connection to database
+require('./db/connection');
 
-})
-mongoose.connection.on('connected', () => {
-    console.log("conneted to mongo yeahh")
-})
-mongoose.connection.on('error', (err) => {
-    console.log("err connecting", err)
-})
+app.use(express.json())
+
+
 // register models (databse sets)
-
 require('./models/user')
 require('./models/post')
 
-app.use(express.json())
+
 // register router
 app.use(require('./routes/auth'))
 app.use(require('./routes/post'))
