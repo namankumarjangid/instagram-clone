@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import M from 'materialize-css'
 import { useHistory } from 'react-router-dom'
+import M from 'materialize-css'
+
 const CretePost = () => {
     const history = useHistory()
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
     const [image, setImage] = useState("")
     const [url, setUrl] = useState("")
+
     useEffect(() => {
         if (url) {
             fetch("/createpost", {
@@ -41,7 +43,7 @@ const CretePost = () => {
         data.append("file", image)
         data.append("upload_preset", "insta-clone")
         data.append("cloud_name", "nkj")
-        fetch("https://api.cloudinary.com/v1_1/nkj/image/upload", {
+        fetch(" https://api.cloudinary.com/v1_1/nkj/image/upload", {
             method: "post",
             body: data
         })
@@ -62,8 +64,7 @@ const CretePost = () => {
                 maxWidth: "500px",
                 padding: "20px",
                 textAlign: "center"
-            }}
-        >
+            }}>
             <input
                 type="text"
                 placeholder="title"
@@ -86,9 +87,7 @@ const CretePost = () => {
                 </div>
             </div>
             <button className="btn waves-effect waves-light #64b5f6 blue darken-1"
-                onClick={() => postDetails()}
-
-            >
+                onClick={() => postDetails()}>
                 Submit post
             </button>
 

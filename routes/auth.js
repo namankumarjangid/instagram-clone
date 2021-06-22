@@ -27,7 +27,7 @@ router.post('/signup', (req, res) => {
     User.findOne({ email: email })
         .then((savedUser) => {
             if (savedUser) {
-                return res.status(422).json({ error: "user already exists with that email" })
+                return res.status(422).json({ error: "user already exists with this email" })
             }
             bcrypt.hash(password, 12)
                 .then(hashedpassword => {
@@ -40,12 +40,13 @@ router.post('/signup', (req, res) => {
 
                     user.save()
                         .then(user => {
-                            // transporter.sendMail({
-                            //     to:user.email,
-                            //     from:"no-reply@insta.com",
-                            //     subject:"signup success",
-                            //     html:"<h1>welcome to instagram</h1>"
-                            // })
+                            transporter.sendMail({
+                                to: user.email,
+                                from: "namanjangid80162@gmail.com",
+                                subject: "signup success",
+                                html: "<h1>Welcome to Instagram</h1>"
+                            })
+                            // <h1 style="color:blue;text-align:center;">This is a heading</h1>
                             res.json({ message: "saved successfully" })
                         })
                         .catch(err => {
@@ -98,19 +99,18 @@ router.post('/reset-password', (req, res) => {
         User.findOne({ email: req.body.email })
             .then(user => {
                 if (!user) {
-                    return res.status(422).json({ error: "User dont exists with that email" })
+                    return res.status(422).json({ error: "User don't exists with that email" })
                 }
                 user.resetToken = token
                 user.expireToken = Date.now() + 3600000
                 user.save().then((result) => {
                     transporter.sendMail({
                         to: user.email,
-                        from: "no-replay@insta.com",
+                        from: "namanjangid80162@gmail.com",
                         subject: "password reset",
-                        html: `
-                     <p>You requested for password reset</p>
-                     <h5>click in this <a href="${EMAIL}/reset/${token}">link</a> to reset password</h5>
-                     `
+                        html: `<p>You requested for password reset</p>
+                     <h5>click in this <a href="http://localhost:3000/reset/${token}">link</a> to reset password</h5>
+                     <p>this link will expire in 1 hour</p>`
                     })
                     res.json({ message: "check your email" })
                 })
@@ -133,7 +133,7 @@ router.post('/new-password', (req, res) => {
                 user.resetToken = undefined
                 user.expireToken = undefined
                 user.save().then((saveduser) => {
-                    res.json({ message: "password updated success" })
+                    res.json({ message: "Password updated succesfully" })
                 })
             })
         }).catch(err => {

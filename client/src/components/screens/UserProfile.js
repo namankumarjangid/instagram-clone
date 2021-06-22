@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { UserContext } from '../../App'
 import { useParams } from 'react-router-dom'
+
 const Profile = () => {
     const [userProfile, setProfile] = useState(null)
 
     const { state, dispatch } = useContext(UserContext)
     const { userid } = useParams()
     const [showfollow, setShowFollow] = useState(state ? !state.following.includes(userid) : true)
+
     useEffect(() => {
         fetch(`/user/${userid}`, {
             headers: {
@@ -115,8 +117,7 @@ const Profile = () => {
                                         margin: "10px"
                                     }}
                                     className="btn waves-effect waves-light #64b5f6 blue darken-1"
-                                    onClick={() => unfollowUser()}
-                                >
+                                    onClick={() => unfollowUser()}>
                                     UnFollow
                                 </button>
                             }
@@ -138,9 +139,20 @@ const Profile = () => {
 
                     </div>
                 </div>
-
-
-                : <h2>loading...!</h2>}
+                // preloader
+                : <div className=" center-align">
+                    <div class="preloader-wrapper big active">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div><div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
 
         </>
     )

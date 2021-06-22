@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { UserContext } from '../../App'
+import M from 'materialize-css'
 
 const Profile = () => {
     const [mypics, setPics] = useState([])
     const { state, dispatch } = useContext(UserContext)
     const [image, setImage] = useState("")
+
     useEffect(() => {
         fetch('/mypost', {
             headers: {
@@ -16,20 +18,18 @@ const Profile = () => {
                 setPics(result.mypost)
             })
     }, [])
+
     useEffect(() => {
         if (image) {
             const data = new FormData()
             data.append("file", image)
             data.append("upload_preset", "insta-clone")
-            data.append("cloud_name", "cnq")
-            fetch("https://api.cloudinary.com/v1_1/cnq/image/upload", {
+            data.append("cloud_name", "nkj")
+            fetch(" https://api.cloudinary.com/v1_1/nkj/image/upload", {
                 method: "post",
                 body: data
-            })
-                .then(res => res.json())
+            }).then(res => res.json())
                 .then(data => {
-
-
                     fetch('/updatepic', {
                         method: "put",
                         headers: {
@@ -45,6 +45,8 @@ const Profile = () => {
                             localStorage.setItem("user", JSON.stringify({ ...state, pic: result.pic }))
                             dispatch({ type: "UPDATEPIC", payload: result.pic })
                             //window.location.reload()
+                            M.toast({ html: "Updated post Successfully", classes: "#43a047 green darken-1" })
+
                         })
 
                 })
@@ -53,8 +55,10 @@ const Profile = () => {
                 })
         }
     }, [image])
+
     const updatePhoto = (file) => {
         setImage(file)
+
     }
     return (
         <div style={{ maxWidth: "550px", margin: "0px auto" }}>
@@ -63,16 +67,13 @@ const Profile = () => {
                 borderBottom: "1px solid grey"
             }}>
 
-
                 <div style={{
                     display: "flex",
-                    justifyContent: "space-around",
-
+                    justifyContent: "space-around"
                 }}>
                     <div>
                         <img style={{ width: "160px", height: "160px", borderRadius: "80px" }}
-                            src={state ? state.pic : "loading"}
-                        />
+                            src={state ? state.pic : "loading"} />
 
                     </div>
                     <div>
@@ -105,8 +106,6 @@ const Profile = () => {
                         )
                     })
                 }
-
-
             </div>
         </div>
     )

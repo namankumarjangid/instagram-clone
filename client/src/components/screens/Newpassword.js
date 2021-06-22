@@ -1,11 +1,13 @@
-import React, { useState, useContext, } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import M from 'materialize-css'
+
 const SignIn = () => {
     const history = useHistory()
     const [password, setPasword] = useState("")
     const { token } = useParams()
-    console.log(token)
+    // console.log(token)
+
     const PostData = () => {
         fetch("/new-password", {
             method: "post",
@@ -31,6 +33,7 @@ const SignIn = () => {
                 console.log(err)
             })
     }
+
     return (
         <div className="mycard">
             <div className="card auth-card input-field">
@@ -40,11 +43,9 @@ const SignIn = () => {
                     type="password"
                     placeholder="enter a new password"
                     value={password}
-                    onChange={(e) => setPasword(e.target.value)}
-                />
+                    onChange={(e) => setPasword(e.target.value)} />
                 <button className="btn waves-effect waves-light #64b5f6 blue darken-1"
-                    onClick={() => PostData()}
-                >
+                    onClick={() => PostData()}>
                     Update password
                 </button>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../../App'
 import { Link } from 'react-router-dom'
+
 const Home = () => {
     const [data, setData] = useState([])
     const { state, dispatch } = useContext(UserContext)
@@ -124,7 +125,7 @@ const Home = () => {
 
                             }</h5>
                             <div className="card-image">
-                                <img src={item.photo} />
+                                <img src={item.photo} alt="item-pic" />
                             </div>
                             <div className="card-content">
                                 <i className="material-icons" style={{ color: "red" }}>favorite</i>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import M from 'materialize-css'
+
 const SignIn = () => {
     const history = useHistory()
     const [name, setName] = useState("")
@@ -13,12 +14,13 @@ const SignIn = () => {
             uploadFields()
         }
     }, [url])
+
     const uploadPic = () => {
         const data = new FormData()
         data.append("file", image)
-        data.append("upload_preset", "new-insta")
-        data.append("cloud_name", "cnq")
-        fetch("https://api.cloudinary.com/v1_1/cnq/image/upload", {
+        data.append("upload_preset", "insta-clone")
+        data.append("cloud_name", "nkj")
+        fetch(" https://api.cloudinary.com/v1_1/nkj/image/upload", {
             method: "post",
             body: data
         })
@@ -59,6 +61,7 @@ const SignIn = () => {
                 console.log(err)
             })
     }
+
     const PostData = () => {
         if (image) {
             uploadPic()
@@ -107,10 +110,6 @@ const SignIn = () => {
                 <h5>
                     <Link to="/signin">Already have an account ?</Link>
                 </h5>
-
-
-
-
 
             </div>
         </div>

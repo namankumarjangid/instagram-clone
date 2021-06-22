@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     expireToken: Date,
     pic: {
         type: String,
-        default: "https://res.cloudinary.com/cnq/image/upload/v1586197723/noimage_d4ipmd.png"
+        default: "https://res.cloudinary.com/nkj/image/upload/v1624253024/aboutpic_ytih2z.png"
     },
     followers: [{ type: ObjectId, ref: "User" }],
     following: [{ type: ObjectId, ref: "User" }]

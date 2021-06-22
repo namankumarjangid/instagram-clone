@@ -12,12 +12,15 @@ import UserProfile from './components/screens/UserProfile'
 import SubscribedUserPosts from './components/screens/SubscribesUserPosts'
 import Reset from './components/screens/Reset'
 import NewPassword from './components/screens/Newpassword'
+
 export const UserContext = createContext()
 
 
 const Routing = () => {
+
   const history = useHistory()
   const { state, dispatch } = useContext(UserContext)
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"))
     if (user) {
@@ -27,6 +30,7 @@ const Routing = () => {
         history.push('/signin')
     }
   }, [])
+
   return (
     <Switch>
       <Route exact path="/" >
@@ -68,7 +72,6 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routing />
-
       </BrowserRouter>
     </UserContext.Provider>
   );

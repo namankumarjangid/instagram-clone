@@ -119,10 +119,8 @@ const Home = () => {
                                 && <i className="material-icons" style={{
                                     float: "right"
                                 }}
-                                    onClick={() => deletePost(item._id)}
-                                >delete</i>
-
-                            }</h5>
+                                    onClick={() => deletePost(item._id)}>delete</i>}
+                            </h5>
                             <div className="card-image">
                                 <img src={item.photo} />
                             </div>

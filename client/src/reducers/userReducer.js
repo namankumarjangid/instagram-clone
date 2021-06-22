@@ -1,24 +1,43 @@
 export const initialState = null
 
 export const reducer = (state, action) => {
-    if (action.type == "USER") {
-        return action.payload
+
+    switch (action.type) {
+        case "USER":
+            return action.payload
+
+        case "CLEAR":
+            return null
+
+        case "UPDATE":
+            return {
+                followers: action.payload.followers,
+                following: action.payload.following
+            }
+
+        default:
+            return state;
     }
-    if (action.type == "CLEAR") {
-        return null
-    }
-    if (action.type == "UPDATE") {
-        return {
-            ...state,
-            followers: action.payload.followers,
-            following: action.payload.following
-        }
-    }
-    if (action.type == "UPDATEPIC") {
-        return {
-            ...state,
-            pic: action.payload
-        }
-    }
-    return state
+
+
+    // if (action.type == "USER") {
+    //     return action.payload
+    // }
+    // if (action.type == "CLEAR") {
+    //     return null
+    // }
+    // if (action.type == "UPDATE") {
+    //     return {
+    //         ...state,
+    //         followers: action.payload.followers,
+    //         following: action.payload.following
+    //     }
+    // }
+    // if (action.type == "UPDATEPIC") {
+    //     return {
+    //         ...state,
+    //         pic: action.payload
+    //     }
+    // }
+    // return state
 }

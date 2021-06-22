@@ -2,15 +2,20 @@ import React, { useContext, useRef, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../App'
 import M from 'materialize-css'
+
 const NavBar = () => {
+
   const searchModal = useRef(null)
   const [search, setSearch] = useState('')
   const [userDetails, setUserDetails] = useState([])
   const { state, dispatch } = useContext(UserContext)
+
   const history = useHistory()
+
   useEffect(() => {
     M.Modal.init(searchModal.current)
   }, [])
+
   const renderList = () => {
     if (state) {
       return [
@@ -24,13 +29,10 @@ const NavBar = () => {
               localStorage.clear()
               dispatch({ type: "CLEAR" })
               history.push('/signin')
-            }}
-          >
+            }}>
             Logout
           </button>
         </li>
-
-
       ]
     } else {
       return [
@@ -63,7 +65,6 @@ const NavBar = () => {
         <Link to={state ? "/" : "/signin"} className="brand-logo left">Instagram</Link>
         <ul id="nav-mobile" className="right">
           {renderList()}
-
         </ul>
       </div>
       <div id="modal1" class="modal" ref={searchModal} style={{ color: "black" }}>
