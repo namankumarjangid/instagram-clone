@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const User = mongoose.model("User")
 const JWT_SECRET = process.env.JWT_SECRET
+
 module.exports = (req, res, next) => {
 
     const { authorization } = req.headers
@@ -22,7 +23,5 @@ module.exports = (req, res, next) => {
             req.user = userdata
             next()
         })
-
-
     })
 }
